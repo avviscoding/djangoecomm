@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{%block title%}
+products home
+{%endblock%}
+{%block css%}
+{%endblock%}
+{%block content%}
+<h1>products page </h1>
+
+{% for product in all_products %}
+<div class="card" style="width: 18rem;">
+    <img src="{{product.image.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{product.product_name}}</h5>
+      <h4 class="card-headng">{{product.price}}</h4>
+      <h6 class="card-text">{{product.stock}}</h6>
+
+      <p class="card-text">{{products.description}}</p>
+      <a href="#" class="btn btn-primary">Add Cart</a>
+    </div>
+  </div>
+
+    
+{%  endfor %}
+{%endblock%}

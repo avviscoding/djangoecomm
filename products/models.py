@@ -26,7 +26,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     stock = models.IntegerField()
     is_available = models.BooleanField(default=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='product_cat',  on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
@@ -34,5 +34,3 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
-    
-    

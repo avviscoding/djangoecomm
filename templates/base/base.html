@@ -47,11 +47,17 @@
                   <div class="col-sm-12">
                      <div class="custom_menu">
                         <ul>
-                           <li><a href="#">Best Sellers</a></li>
-                           <li><a href="#">Gift Ideas</a></li>
-                           <li><a href="#">New Releases</a></li>
-                           <li><a href="#">Today's Deals</a></li>
-                           <li><a href="#">Customer Service</a></li>
+                           <li><a href="#">Home</a></li>
+                           <li><a href="#">About Us</a></li>
+                           <li><a href="#">Contact</a></li>
+                            {% if request.user.is_authenticated %}
+                              <li><a href="{% url 'account:logout' %}">Logout</a></li>
+                            {% else %}
+                              <li><a href="{% url 'account:login' %}">Login</a></li>
+                                <li><a href="{% url 'account:signup' %}">Singup</a></li>
+                            {% endif %}
+
+
                         </ul>
                      </div>
                   </div>
@@ -82,25 +88,24 @@
                      <a href="jewellery.html">Jewellery</a>
                   </div>
                   <span class="toggle_icon" onclick="openNav()"><img src="{% static 'images/toggle-icon.png' %}"></span>
-                  <div class="dropdown">
-                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category
-                     </button>
-                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                     </div>
-                  </div>
+                  
                   <div class="main">
                      <!-- Another variation with a button -->
-                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search this blog">
-                        <div class="input-group-append">
-                           <button class="btn btn-secondary" type="button" style="background-color: #f26522; border-color:#f26522 ">
-                           <i class="fa fa-search"></i>
-                           </button>
-                        </div>
-                     </div>
+                  <form class="" action="{% url 'products:products_page' %}" method="post">
+                    {% csrf_token %}
+                    <div class="input-group">
+                       <input type="text" class="form-control" name='search_product' placeholder="Search this blog">
+                       <div class="input-group-append">
+                          <button class="btn btn-secondary" type="submit" style="background-color: #f26522; border-color:#f26522 ">
+                          <i class="fa fa-search"></i>
+                          </button>
+                       </div>
+                    </div>
+                  </form>
+
+
+
+
                   </div>
                   <div class="header_box">
                      <div class="lang_box ">

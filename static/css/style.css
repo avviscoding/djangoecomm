@@ -1,4 +1,4 @@
---------------------------------------------------------------------- File Name: style.css ---------------------------------------------------------------------*/
+--------------------------------------------------------------------- File Name style.css ---------------------------------------------------------------------*/
 /*--------------------------------------------------------------------- import Files ---------------------------------------------------------------------*/
 
 @import url(animate.min.css);
@@ -853,7 +853,7 @@ input.mail_bt::placeholder {
     width: 30%;
     float: right;
     font-size: 16px;
-    color: #f26522;
+    color: #c39078;
     background-color: transparent;
     padding: 20px 0px 5px 0px;
     border-radius: 30px;
@@ -894,7 +894,7 @@ input.mail_bt::placeholder {
 }
 
 .footer_menu li a:hover {
-    color: #f26522;
+    color: #ba6d49;
 }
 
 .location_main {
@@ -916,7 +916,7 @@ input.mail_bt::placeholder {
 }
 
 .location_main a:hover {
-    color: #f26522;
+    color: #867b77;
 }
 
 
@@ -946,7 +946,7 @@ input.mail_bt::placeholder {
 }
 
 .copyright_text a:hover {
-    color: #f26522;
+    color: #98857c;
 }
 
 .margin_top90 {

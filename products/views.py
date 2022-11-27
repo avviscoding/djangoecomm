@@ -108,14 +108,11 @@ def add_to_cart(request, id):
         if order.items.filter(item__id=item.id).exists():
             order_item.quantity += 1
             order_item.save()
-            messages.info(request, 'This item quantity was updated to your cart')
         else:
-            messages.info(request, 'This item was added to your cart')
             order.items.add(order_item)
     else:
         order = Order.objects.create(user=request.user)
         order.items.add(order_item)
-        messages.info(request, 'This item was added to your cart')
     return redirect('products:products_page')
 
 

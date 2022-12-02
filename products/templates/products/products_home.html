@@ -61,21 +61,43 @@ products home
 		    		<div class="row mt-5">
 		          <div class="col text-center">
 		            <div class="block-27">
-		              <ul>
-		                <li><a href="#">&lt;</a></li>
-		                <li class="active"><span>1</span></li>
-		                <li><a href="#">2</a></li>
-		                <li><a href="#">3</a></li>
-		                <li><a href="#">4</a></li>
-		                <li><a href="#">5</a></li>
-		                <li><a href="#">&gt;</a></li>
-		              </ul>
+                  <span class="step-links">
+                      {% if all_products_fashion.has_previous %}
+                          <a href="?page=1">&laquo; first</a>
+                          <a href="?page={{ all_products_fashion.previous_page_number }}">previous</a>
+                      {% endif %}
+
+                      <span class="current">
+                          Page {{ all_products_fashion.number }} of {{ all_products_fashion.paginator.num_pages }}.
+                      </span>
+
+                      {% if all_products_fashion.has_next %}
+                          <a href="?page={{ all_products_fashion.next_page_number }}">next</a>
+                          <a href="?page={{ all_products_fashion.paginator.num_pages }}">last &raquo;</a>
+                      {% endif %}
+                  </span>
+
 		            </div>
 		          </div>
 		        </div>
 		    	</div>
 
+          <div class="sidebar-box">
+            <form class="search-form" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <span class="icon ion-ios-search"></span>
+                <input type="text" class="form-control" name='search_product' placeholder="Type a keyword and hit enter">
+              </div>
+              <div align="center">
+                <button type="submit" class="btn btn-primary py-2 px-3">Search</button>
+              </div>
+
+            </form>
+          </div>
+
 		    	<div class="col-md-4 col-lg-2">
+
 		    		<div class="sidebar">
 							<div class="sidebar-box-2">
 								<h2 class="heading">Categories</h2>
@@ -164,40 +186,11 @@ products home
 							</div>
 							<div class="sidebar-box-2">
 								<h2 class="heading">Price Range</h2>
-								<form method="post" class="colorlib-form-2">
-		              <div class="row">
-		                <div class="col-md-12">
-		                  <div class="form-group">
-		                    <label for="guests">Price from:</label>
-		                    <div class="form-field">
-		                      <i class="icon icon-arrow-down3"></i>
-		                      <select name="people" id="people" class="form-control">
-		                        <option value="#">1</option>
-		                        <option value="#">200</option>
-		                        <option value="#">300</option>
-		                        <option value="#">400</option>
-		                        <option value="#">1000</option>
-		                      </select>
-		                    </div>
-		                  </div>
-		                </div>
-		                <div class="col-md-12">
-		                  <div class="form-group">
-		                    <label for="guests">Price to:</label>
-		                    <div class="form-field">
-		                      <i class="icon icon-arrow-down3"></i>
-		                      <select name="people" id="people" class="form-control">
-		                        <option value="#">2000</option>
-		                        <option value="#">4000</option>
-		                        <option value="#">6000</option>
-		                        <option value="#">8000</option>
-		                        <option value="#">10000</option>
-		                      </select>
-		                    </div>
-		                  </div>
-		                </div>
-		              </div>
-		            </form>
+	
+                <form method="get">
+                  {{ all_products_filter.form.as_p }}
+                  <button type="submit" class="btn btn-primary py-2 px-3">Search</button>
+              </form>
 							</div>
 						</div>
     			</div>

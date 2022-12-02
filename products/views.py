@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from cart.models import *
 from django.contrib import messages
+from django.core.paginator import Paginator
+from .filters import ProductFilter
+
 
 # Create your views here.
 @login_required(login_url = 'account:login')
@@ -19,6 +22,7 @@ def products_home(request):
 
     all_category = Category.objects.all()
 
+
     if request.method == 'POST':
         if 'search_product' in request.POST:
             search = request.POST['search_product']
@@ -28,10 +32,24 @@ def products_home(request):
                 all_products_fashion = Product.objects.all()
     else:
         all_products_fashion = Product.objects.all()
+        all_products_filter = ProductFilter(request.GET, queryset=all_products_fashion)
+        all_products_fashion = all_products_filter.qs
+        print(all_products_fashion)
+    page_num = request.GET.get('page', 1)
+    paginator = Paginator(all_products_fashion, 12)
+
+    try:
+        all_products_fashion = paginator.page(page_num)
+    except PageNotAnInteger:
+        all_products_fashion = paginator.page(1)
+    except EmptyPage:
+        all_products_fashion = paginator.page(paginator.num_pages)
+
 
     context = {
         'all_products_fashion':all_products_fashion,
         'all_category':all_category,
+        'all_products_filter':all_products_filter,
     }
     return render(request, 'products/products_home.html', context)
 

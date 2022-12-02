@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'django_countries',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'products:products_page'
 LOGOUT_REDIRECT_URL = 'account:login'
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mariadoe94@gmail.com'
+EMAIL_HOST_PASSWORD = 'mitvedtgocdmwqdz'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'CodingWithSomesh Team <noreply@mysocialclone.com>'

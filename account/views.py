@@ -5,6 +5,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.contrib import messages
+from django.conf import settings
+from django.core.mail import send_mail
 # Create your views here.
 
 def login(request):
@@ -38,7 +40,17 @@ def contact(request):
             message = user_message
         )
         contact_user.save()
-        messages.info(request, f"Hey, {user_name} Thanks for being awesome! We have received your message and would like to thank you for writing to us.")
+        messages.info(request, f"Hey, {user_name} Thanks for being awesome! We have received your message and would like to thank you for writing to us. ...")
+
+        send_mail(
+            user_subject,
+            f"Hey {user_name} we have received your mail, we will get beck in touch with you as soon as possible. Thanks for contacting us",
+            settings.EMAIL_HOST_USER,
+            [user_email],
+            fail_silently=False,
+        )
+
+
         return redirect('account:contact')
 
     return render(request, 'registration/contact.html')
